@@ -1,10 +1,12 @@
 package com.brunch.kaltz.domain;
 
 import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class JpaSearchRepository implements SearchRepository {
 
@@ -22,7 +24,9 @@ public class JpaSearchRepository implements SearchRepository {
 
     @Override
     public Optional<Search> findById(Long id) {
+        System.out.println("id = " + id);
         Search search = em.find(Search.class, id);
+        System.out.println("search = " + search);
         return Optional.ofNullable(search);
     }
 }

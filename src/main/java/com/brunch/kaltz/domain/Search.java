@@ -13,6 +13,9 @@ public class Search {
     @Column
     private String q;
 
+    public Search() {
+    }
+
     public Search(String q) {
         this.q = q;
     }
