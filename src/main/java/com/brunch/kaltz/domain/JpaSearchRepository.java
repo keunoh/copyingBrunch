@@ -24,9 +24,7 @@ public class JpaSearchRepository implements SearchRepository {
 
     @Override
     public Optional<Search> findById(Long id) {
-        System.out.println("id = " + id);
         Search search = em.find(Search.class, id);
-        System.out.println("search = " + search);
         return Optional.ofNullable(search);
     }
 }

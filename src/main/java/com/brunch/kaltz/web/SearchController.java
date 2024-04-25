@@ -2,7 +2,7 @@ package com.brunch.kaltz.web;
 
 import com.brunch.kaltz.domain.JpaSearchRepository;
 import com.brunch.kaltz.domain.Search;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 
+@Slf4j
 @Controller
 public class SearchController {
 
@@ -27,12 +28,17 @@ public class SearchController {
 
     @GetMapping("/newSearch")
     public String newSearch(@RequestParam(value = "q") String q, Model model) {
-        System.out.println("q = " + q);
 
         Optional<Search> findSearch = repository.findById(Long.parseLong(q));
-        Search search = findSearch.get();
-        model.addAttribute(search);
 
-        return "/search/newSearch";
+        Search search = findSearch.orElse(null);
+
+        if (search == null) {
+            // 검색 시 받아오는 객체가 없다면 검색 창으로 리다이렉트
+            return "redirect:/search";
+        } else {
+            model.addAttribute(search);
+            return "/search/newSearch";
+        }
     }
 }

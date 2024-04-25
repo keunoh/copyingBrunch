@@ -13,6 +13,7 @@ public class Search {
     @Column
     private String q;
 
+    // 기본 생성자가 없으면 JPA 조회 시 오류 발생
     public Search() {
     }
 
