@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
@@ -24,6 +25,23 @@ public class SearchController {
     @GetMapping("/search")
     public String search() {
         return "/search/search";
+    }
+
+    @GetMapping("/save")
+    public String goToSavePage() {
+        return "/search/save";
+    }
+
+    @PostMapping("/save")
+    public String saveData(@RequestParam(value = "dataname") String dataname,
+                           @RequestParam(value = "datanumber") String datanumber) {
+        SearchDto searchDto = new SearchDto(dataname, datanumber);
+        Search search = searchDto.makeSearchObj();
+
+        repository.save(search);
+
+        return "/search/afterSave";
+
     }
 
     @GetMapping("/newSearch")
