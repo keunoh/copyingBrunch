@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Search Result</h1>
-    <p th:text="${search.q}">Hello Data!</p>
+    <div>
+        <p>검색된 데이터</p>
+        <p th:text="${search.q}">Hello Data!</p>
+    </div>
     <button id="backward" type="button" onclick="location.href='/search'">뒤로가기</button>
 </body>
 </html>
