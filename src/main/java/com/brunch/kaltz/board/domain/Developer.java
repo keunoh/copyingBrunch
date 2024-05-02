@@ -1,7 +1,11 @@
 package com.brunch.kaltz.board.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class Developer {
 
@@ -16,5 +20,11 @@ public class Developer {
     private Long age;
 
     public Developer() {
+    }
+
+    public static Developer whoAreYou(BoardDto boardDto) {
+        Developer developer = new Developer();
+        developer.setId(boardDto.getDeveloperId());
+        return developer;
     }
 }
