@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="./Board.css">
+    <!-- 타임리프는 기본적으로 css 나 js 파일은 static 폴더에 있다고 가정한다. -->
+    <link rel="stylesheet" href="../../static/css/Board.css" th:href="@{/css/Board.css}" />
 </head>
 <body>
     <h1>This is Board</h1>
