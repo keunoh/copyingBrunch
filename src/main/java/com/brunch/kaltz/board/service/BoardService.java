@@ -8,6 +8,8 @@ import com.brunch.kaltz.board.repo.JpaBoardRepository;
 import com.brunch.kaltz.board.repo.JpaDeveloperRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoardService {
 
@@ -30,5 +32,10 @@ public class BoardService {
 
         // 3. 생성된 board를 저장
         jpaBoardRepository.save(board);
+    }
+
+    // 전체 조회
+    public List<Board> findAll() {
+        return jpaBoardRepository.findAll();
     }
 }

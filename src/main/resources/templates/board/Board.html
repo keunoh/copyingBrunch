@@ -23,6 +23,12 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:each="result : ${resultList}">
+            <th scope="row" th:text="${result.developer.name}"></th>
+            <td th:text="${result.interest}"></td>
+            <td th:text="${result.developer.age}"></td>
+        </tr>
+        <!--
         <tr>
             <th scope="row">Chris</th>
             <td>HTML tables</td>
@@ -43,6 +49,7 @@
             <td>Web performance</td>
             <td>36</td>
         </tr>
+        -->
         </tbody>
         <tfoot>
         <tr>

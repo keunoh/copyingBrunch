@@ -1,5 +1,6 @@
 package com.brunch.kaltz.board.web;
 
+import com.brunch.kaltz.board.domain.Board;
 import com.brunch.kaltz.board.domain.BoardDto;
 import com.brunch.kaltz.board.service.BoardService;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class BoardController {
@@ -18,8 +21,13 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public String openBoard() {
+    public String openBoard(Model model) {
         // Get Method : 리소스를 사용자에게 전달하라
+
+        // 게시판의 모든 데이터를 조회해 오기
+        List<Board> resultList = boardService.findAll();
+
+        model.addAttribute("resultList", resultList);
 
         return "/board/Board";
     }

@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Repository
 public class JpaBoardRepository implements BoardRepository {
@@ -20,5 +22,11 @@ public class JpaBoardRepository implements BoardRepository {
 
         em.persist(board);
         return null;
+    }
+
+    @Override
+    public List<Board> findAll() {
+        return em.createQuery("select b from Board as b", Board.class)
+                .getResultList();
     }
 }
