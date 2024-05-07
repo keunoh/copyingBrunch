@@ -22,9 +22,9 @@ public class Developer {
     public Developer() {
     }
 
-    public static Developer whoAreYou(BoardDto boardDto) {
-        Developer developer = new Developer();
-        developer.setId(boardDto.getDeveloperId());
-        return developer;
-    }
+//    public static Developer whoAreYou(BoardDto boardDto) {
+//        Developer developer = new Developer();
+//        developer.setId(boardDto.getDeveloperId());
+//        return developer;
+//    }
 }

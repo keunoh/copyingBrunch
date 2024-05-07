@@ -20,12 +20,20 @@ public class Board {
     @Column
     private String interest;
 
-    public Board makeNewPost(BoardDto boardDto) {
-        Board board = new Board();
-        board.setInterest(boardDto.getInterest());
-        // board.getDeveloper().getId() = boardDto.getDeveloperId();
-        Developer developer = Developer.whoAreYou(boardDto);
-        board.setDeveloper(developer);
-        return board;
+    public Board() {
     }
+
+    public Board(Developer developer) {
+        this.developer = developer;
+    }
+
+//    public Board makeNewPost(BoardDto boardDto) {
+//        Board board = new Board();
+//        board.setInterest(boardDto.getInterest());
+//        // board.getDeveloper().getId() = boardDto.getDeveloperId();
+//        Developer developer = Developer.whoAreYou(boardDto);
+//        board.setDeveloper(developer);
+//        return board;
+//    }
+
 }

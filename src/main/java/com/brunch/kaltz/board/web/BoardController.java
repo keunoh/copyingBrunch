@@ -1,6 +1,7 @@
 package com.brunch.kaltz.board.web;
 
 import com.brunch.kaltz.board.domain.BoardDto;
+import com.brunch.kaltz.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BoardController {
+
+    private final BoardService boardService;
+
+    public BoardController(BoardService boardService) {
+        this.boardService = boardService;
+    }
 
     @GetMapping("/board")
     public String openBoard() {
@@ -30,8 +37,8 @@ public class BoardController {
     @PostMapping("/saveBoard")
     public String saveBoard(@ModelAttribute("boardDto") BoardDto boardDto) {
 
-        // TODO: Board 객체를 만들어서 Repo 저장한다.
+        boardService.saveBoard(boardDto);
 
-        return "redirect:/board/Board";
+        return "redirect:/board";
     }
 }
