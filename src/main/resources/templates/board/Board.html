@@ -27,6 +27,9 @@
             <th scope="row" th:text="${result.developer.name}"></th>
             <td th:text="${result.interest}"></td>
             <td th:text="${result.developer.age}"></td>
+            <td>
+                <button id="delete" type="button" th:onclick="|location.href='@{/deleteBoard(id=${result.id})}'|">delete</button>
+            </td>
         </tr>
         <!--
         <tr>
@@ -54,7 +57,7 @@
         <tfoot>
         <tr>
             <th scope="row" colspan="2">Average age</th>
-            <td>33</td>
+            <td></td>
         </tr>
         </tfoot>
     </table>

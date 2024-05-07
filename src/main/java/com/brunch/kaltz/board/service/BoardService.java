@@ -38,4 +38,9 @@ public class BoardService {
     public List<Board> findAll() {
         return jpaBoardRepository.findAll();
     }
+
+    // 삭제
+    public void delete(Long boardId) {
+        jpaBoardRepository.delete(boardId);
+    }
 }

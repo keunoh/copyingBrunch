@@ -25,8 +25,19 @@ public class JpaBoardRepository implements BoardRepository {
     }
 
     @Override
+    public Board findById(Long boardId) {
+        return em.find(Board.class, boardId);
+    }
+
+    @Override
     public List<Board> findAll() {
         return em.createQuery("select b from Board as b", Board.class)
                 .getResultList();
+    }
+
+    @Override
+    public void delete(Long boardId) {
+        Board board = em.find(Board.class, boardId);
+        em.remove(board);
     }
 }
