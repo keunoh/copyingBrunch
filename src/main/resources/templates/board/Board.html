@@ -28,6 +28,9 @@
             <td th:text="${result.interest}"></td>
             <td th:text="${result.developer.age}"></td>
             <td>
+                <button id="update" type="button" th:onclick="|location.href='@{/updateBoard(id=${result.id})}'|">update</button>
+            </td>
+            <td>
                 <button id="delete" type="button" th:onclick="|location.href='@{/deleteBoard(id=${result.id})}'|">delete</button>
             </td>
         </tr>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/updateBoard" th:action="@{/updateBoard}" th:object="${boardDto}"
+      method="post" class="form-example">
+    <div class="form-example">
+        <label for="interest">Change your Most interest in: </label>
+        <input type="text" name="interest" th:field="*{interest}"
+               id="interest" required />
+    </div>
+    <div class="form-example">
+        <label for="developerId">This your Developer Number(whoareyou?) : </label>
+        <input type="text" name="developerId" th:field="*{developerId}"
+               id="developerId" required readonly />
+    </div>
+    <div class="form-example">
+        <input type="submit" value="Update!" />
+    </div>
+</form>
+</body>
+</html>

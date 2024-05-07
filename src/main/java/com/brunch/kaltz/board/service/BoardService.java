@@ -43,4 +43,9 @@ public class BoardService {
     public void delete(Long boardId) {
         jpaBoardRepository.delete(boardId);
     }
+
+    // 수정
+    public void update(BoardDto dto) {
+        jpaBoardRepository.update(dto);
+    }
 }

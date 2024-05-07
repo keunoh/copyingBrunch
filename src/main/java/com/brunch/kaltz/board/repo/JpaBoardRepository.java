@@ -1,6 +1,7 @@
 package com.brunch.kaltz.board.repo;
 
 import com.brunch.kaltz.board.domain.Board;
+import com.brunch.kaltz.board.domain.BoardDto;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +40,11 @@ public class JpaBoardRepository implements BoardRepository {
     public void delete(Long boardId) {
         Board board = em.find(Board.class, boardId);
         em.remove(board);
+    }
+
+    @Override
+    public void update(BoardDto dto) {
+        Board board = em.find(Board.class, dto.getDeveloperId());
+        board.setInterest(dto.getInterest());
     }
 }
