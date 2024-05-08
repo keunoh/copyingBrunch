@@ -9,6 +9,12 @@ import lombok.Setter;
 @Entity
 public class Board {
 
+    //@Enumerated(EnumType.STRING)
+    //private RoleType roleType
+
+    //@Temporal(TemporalType.TIMESTAMP)
+    //private Date createdDate;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
