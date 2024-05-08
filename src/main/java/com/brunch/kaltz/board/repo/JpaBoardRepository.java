@@ -12,6 +12,10 @@ import java.util.List;
 @Repository
 public class JpaBoardRepository implements BoardRepository {
 
+    // 엔티티 매니저는 데이터 변경 시 트랜잭션을 시작해야하는데
+    // 나는 하지 않았다 근데 db 반영됨. 확인해봐야함
+    // 커밋시점에 db에 sql을 보내는지 확인
+
     private final EntityManager em;
 
     public JpaBoardRepository(EntityManager em) {
