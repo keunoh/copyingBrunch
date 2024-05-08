@@ -1,4 +1,4 @@
-package com.brunch.kaltz.web;
+package com.brunch.kaltz.search.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

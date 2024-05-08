@@ -1,4 +1,4 @@
-package com.brunch.kaltz.domain;
+package com.brunch.kaltz.search.domain;
 
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;

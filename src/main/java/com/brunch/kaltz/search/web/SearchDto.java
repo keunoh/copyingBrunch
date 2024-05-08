@@ -1,6 +1,6 @@
-package com.brunch.kaltz.web;
+package com.brunch.kaltz.search.web;
 
-import com.brunch.kaltz.domain.Search;
+import com.brunch.kaltz.search.domain.Search;
 import lombok.Getter;
 import lombok.Setter;
 
