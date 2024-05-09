@@ -3,6 +3,7 @@ package com.brunch.kaltz.fileupload.service;
 import com.brunch.kaltz.fileupload.domain.StorageException;
 import com.brunch.kaltz.fileupload.domain.StorageFileNotFoundException;
 import com.brunch.kaltz.fileupload.domain.StorageProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

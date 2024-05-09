@@ -2,6 +2,7 @@ package com.brunch.kaltz.fileupload.web;
 
 import com.brunch.kaltz.fileupload.domain.StorageFileNotFoundException;
 import com.brunch.kaltz.fileupload.service.StorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 public class FileUploadController {
 
@@ -37,9 +39,11 @@ public class FileUploadController {
         return "/fileupload/uploadForm";
     }
 
-    @GetMapping("/files/{filename:.+")
+    @GetMapping("/files/{filename}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> serveFile(@PathVariable("filename") String filename) {
+
+        log.info("serveFile filename : " + filename);
 
         Resource file = storageService.loadAsResource(filename);
 

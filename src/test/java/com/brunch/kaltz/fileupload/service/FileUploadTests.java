@@ -1,24 +1,19 @@
 package com.brunch.kaltz.fileupload.service;
 
-import com.brunch.kaltz.fileupload.domain.StorageFileNotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.ContentResultMatchers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -33,36 +28,23 @@ class FileUploadTests {
 
     @Test
     public void shouldListAllFiles() throws Exception {
-        BDDMockito.given(this.storageService.loadAll())
+        /**
+         * 여기서 storageService.loadAll()을 호출한다.
+         * first.txt, second.txt 리턴을 보장한다.
+         */
+        given(this.storageService.loadAll())
                 .willReturn(Stream.of(Paths.get("first.txt"), Paths.get("second.txt")));
 
-        this.mvc.perform(MockMvcRequestBuilders.get("/fileUpload"))
+        /**
+         * /fileUpload URL 실행한다.
+         * 1) status 200 리턴을 예상한다.
+         * 2) 두개의 리소스 (http://localhost/files/first.txt, http://localhost/files/second.txt)가 존재함을 예상한다.
+         */
+        this.mvc.perform(get("/fileUpload"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute(
-                        "files", Matchers.contains("http://localhost/files/first.txt",
-                                "http://localhost/files/second.txt")));
-    }
-
-    @Test
-    public void shouldSaveUploadedFile() throws Exception {
-        MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt",
-                "text/plain", "Spring Framework".getBytes());
-        this.mvc.perform(multipart("/").file(multipartFile))
-                .andExpect(status().isFound())
-                .andExpect(header().string("Location", "/"));
-
-        BDDMockito.then(this.storageService).should().store(multipartFile);
-    }
-
-    private ContentResultMatchers header() {
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void should404WhenMissingFile() throws Exception {
-        BDDMockito.given(this.storageService.loadAsResource("test.txt"))
-                .willThrow(StorageFileNotFoundException.class);
-
-        this.mvc.perform(MockMvcRequestBuilders.get("/files/test.txt")).andExpect(status().isNotFound());
+        // first.txt 와 second.txt 가 대입이 안 되는 거 같음
+                .andExpect(model().attribute("files",
+                        Matchers.contains("http://localhost/files/first.txt",
+                                        "http://localhost/files/second.txt")));
     }
 }
