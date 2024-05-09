@@ -39,6 +39,7 @@ public class FileUploadController {
         return "/fileupload/uploadForm";
     }
 
+    //@GetMapping("/files/{filename:.+}) <- PathVariable 정규식이 안 먹는다
     @GetMapping("/files/{filename}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable("filename") String filename) {
