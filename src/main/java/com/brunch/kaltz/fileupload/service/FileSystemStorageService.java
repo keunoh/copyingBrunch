@@ -1,8 +1,10 @@
 package com.brunch.kaltz.fileupload.service;
 
+import com.brunch.kaltz.fileupload.domain.MyFile;
 import com.brunch.kaltz.fileupload.domain.StorageException;
 import com.brunch.kaltz.fileupload.domain.StorageFileNotFoundException;
 import com.brunch.kaltz.fileupload.domain.StorageProperties;
+import com.brunch.kaltz.fileupload.repo.FileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -25,12 +27,15 @@ public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
 
+    private final FileRepository fileRepository;
+
     @Autowired
-    public FileSystemStorageService(StorageProperties properties) {
+    public FileSystemStorageService(StorageProperties properties, FileRepository fileRepository) {
         if (properties.getLocation().trim().length() == 0) {
             throw new StorageException("File upload location can not be Empty.");
         }
         this.rootLocation = Paths.get(properties.getLocation());
+        this.fileRepository = fileRepository;
     }
 
     @Override
@@ -54,6 +59,16 @@ public class FileSystemStorageService implements StorageService {
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
+
+                /**
+                 * JPA 파일 저장
+                 */
+                MyFile myFile = new MyFile();
+                myFile.setFileName(file.getOriginalFilename());
+                myFile.setContentType(file.getContentType());
+
+                fileRepository.save(myFile);
+                // END
             }
         }
         catch (IOException e) {
