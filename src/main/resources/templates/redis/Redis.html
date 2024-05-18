@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Redis Test Page!</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+<form class="form-example" name="myForm">
+    <div class="form-example">
+        <label for="name">Enter your redis name: </label>
+        <input type="text" name="name" id="name" required />
+    </div>
+</form>
+<div class="form-example">
+    <button id="save" onclick="submitform()">Let's save redis !</button>
+</div>
+</body>
+<script type="text/javascript">
+    function submitform() {
+
+        let data = {
+            name: $("#name").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/redisTest",
+            data: JSON.stringify(data),
+            success: function(){},
+            dataType: "json",
+           contentType : "application/json"
+        }).done(function (res) {
+            alert("redis complete.");
+            location.href = "/";
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+</script>
+</html>
