@@ -26,6 +26,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'mysql:mysql-connector-java:8.0.32'
 
+	// GSON
+	implementation 'com.google.code.gson:gson:2.8.7'
+
 	// Redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	
