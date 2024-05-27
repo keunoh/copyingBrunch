@@ -1,5 +1,8 @@
 package com.brunch.kaltz.builder;
 
+import lombok.Getter;
+
+@Getter
 public class Student {
     private int id;
     private String name = "random";
